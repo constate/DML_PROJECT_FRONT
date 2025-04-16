@@ -47,8 +47,8 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl px-8 py-10 border border-gray-200">
+    <div className="flex items-center justify-center bg-gray-50 px-4">
+      <div className="flex h-[100vh] w-full max-w-md bg-white rounded-2xl shadow-xl px-8 py-10 border border-gray-200 flex-col justify-center">
         <div className="mb-10 text-center">
           <h1 className="text-2xl font-bold text-gray-800">로그인</h1>
           <p className="text-sm text-gray-500 mt-2">
