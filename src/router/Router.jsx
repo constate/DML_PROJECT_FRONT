@@ -3,10 +3,11 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { PATH } from "./routePath";
-import { KioskStartPage, LoginPage, MenuPage } from "@pages";
+import { PATH } from './routePath';
+import { KioskStartPage, LoginPage, MenuPage } from '@pages';
+import { SelectPage } from '@/pages';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ export const router = createBrowserRouter(
       <Route path={PATH.Login} element={<LoginPage />} />
       <Route path={PATH.KioskStart} element={<KioskStartPage />} />
       <Route path={PATH.Menu} element={<MenuPage />} />
-    </Route>
-  )
+      <Route path={PATH.Select} element={<SelectPage />} />
+    </Route>,
+  ),
 );
