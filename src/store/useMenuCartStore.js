@@ -1,11 +1,7 @@
 import { create } from 'zustand';
 
 export const useMenuCartStore = create((set) => ({
-  selectedMenu: null,
   cartItems: [],
-
-  openDrawer: (menu) => set({ selectedMenu: menu }),
-  closeDrawer: () => set({ selectedMenu: null }),
 
   addToCart: (menu, count) =>
     set((state) => {
@@ -21,4 +17,16 @@ export const useMenuCartStore = create((set) => ({
         cartItems: [...state.cartItems, { ...menu, count }],
       };
     }),
+
+  updateItemCount: (id, newCount) =>
+    set((state) => ({
+      cartItems: state.cartItems.map((item) =>
+        item.id === id ? { ...item, count: Math.max(1, newCount) } : item,
+      ),
+    })),
+
+  removeItem: (id) =>
+    set((state) => ({
+      cartItems: state.cartItems.filter((item) => item.id !== id),
+    })),
 }));

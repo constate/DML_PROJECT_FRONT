@@ -2,12 +2,12 @@ import React from 'react';
 import { useMenuCartStore } from '@/store/useMenuCartStore';
 
 export const MenuItemCard = ({ menu }) => {
-  const openDrawer = useMenuCartStore((state) => state.openDrawer);
+  const addToCart = useMenuCartStore((state) => state.addToCart);
 
   return (
     <div
       className="cursor-pointer rounded-xl border bg-white transition hover:shadow-md"
-      onClick={() => openDrawer(menu)}
+      onClick={() => addToCart(menu, 1)}
     >
       <img
         src={menu.imageUrl}

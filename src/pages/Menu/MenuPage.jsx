@@ -1,9 +1,10 @@
 import { Header } from '@/components/_common/Header';
-import { useKioskStore } from '@/store/useKioskStore';
+
+import { useMenuCartStore } from '@/store/useMenuCartStore';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { MenuItemCard } from './MenuItemCard';
-import { MenuDrawer } from './MenuDrawer';
+import { CartPanel } from './CartPanel';
+
 const menuData = [
   {
     categoryId: 1,
@@ -85,48 +86,53 @@ const menuData = [
   },
 ];
 export const MenuPage = () => {
-  const navigate = useNavigate();
-  const reset = useKioskStore((state) => state.reset);
-
   const [selectedCategory, setSelectedCategory] = useState('ALL');
+  const cartItems = useMenuCartStore((state) => state.cartItems);
 
-  // 전체 탭 포함해서 카테고리 명 추출
   const categories = ['ALL', ...menuData.map((c) => c.categoryName)];
-
-  // 선택된 카테고리 기준 메뉴 필터링
   const filteredMenus =
     selectedCategory === 'ALL'
       ? menuData.flatMap((c) => c.menus)
       : menuData.find((c) => c.categoryName === selectedCategory)?.menus || [];
 
   return (
-    <div className="flex h-screen flex-col">
-      {/* 헤더 */}
-      <Header />
+    <div className="flex h-screen">
+      {/* 좌측 메뉴 영역 */}
+      <div className="flex flex-1 flex-col">
+        <Header />
+        {/* 카테고리 탭 */}
+        <div className="flex overflow-x-auto border-b bg-gray-50 px-4 py-2">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`mr-2 rounded-full border px-4 py-2 ${
+                selectedCategory === cat
+                  ? 'bg-green-800 text-white'
+                  : 'bg-white text-gray-700'
+              }`}
+              onClick={() => setSelectedCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
-      {/* 카테고리 탭 */}
-      <div className="flex overflow-x-auto border-b bg-gray-50 px-4 py-2">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            className={`mr-2 rounded-full border px-4 py-2 ${
-              selectedCategory === cat
-                ? 'bg-green-800 text-white'
-                : 'bg-white text-gray-700'
-            }`}
-            onClick={() => setSelectedCategory(cat)}
-          >
-            {cat}
-          </button>
-        ))}
+        {/* 메뉴 카드 영역 */}
+        <div
+          className={`grid gap-4 p-4 ${
+            cartItems.length > 0
+              ? 'grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6'
+              : 'grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-6'
+          }`}
+        >
+          {filteredMenus.map((menu) => (
+            <MenuItemCard key={menu.id} menu={menu} />
+          ))}
+        </div>
       </div>
 
-      {/* 메뉴 리스트 */}
-      <div className="grid grid-cols-2 gap-4 overflow-y-auto p-4">
-        {filteredMenus.map((menu) => (
-          <MenuItemCard key={menu.id} menu={menu} />
-        ))}
-      </div>
+      {/* 우측 장바구니 패널 (있을 때만 표시) */}
+      {cartItems.length > 0 && <CartPanel />}
     </div>
   );
 };
