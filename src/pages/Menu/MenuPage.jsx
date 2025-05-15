@@ -101,14 +101,14 @@ export const MenuPage = () => {
       <div className="flex flex-1 flex-col">
         <Header />
         {/* 카테고리 탭 */}
-        <div className="flex overflow-x-auto border-b bg-gray-50 px-4 py-2">
+        <div className="flex overflow-x-auto border-b-[1px] border-[#f0f0f0] bg-[#fafafa] px-4 py-2">
           {categories.map((cat) => (
             <button
               key={cat}
-              className={`mr-2 rounded-full border px-4 py-2 ${
+              className={`mr-2 rounded-full border-[1px] px-4 py-2 text-sm transition-colors ${
                 selectedCategory === cat
-                  ? 'bg-green-800 text-white'
-                  : 'bg-white text-gray-700'
+                  ? 'bg-green-700 text-white hover:bg-green-800'
+                  : 'border-[#e5e5e5] bg-[#fdfdfd] text-[#555] hover:bg-[#f0f0f0]'
               }`}
               onClick={() => setSelectedCategory(cat)}
             >

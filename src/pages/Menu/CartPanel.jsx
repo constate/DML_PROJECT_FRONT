@@ -8,14 +8,18 @@ export const CartPanel = () => {
   );
 
   return (
-    <aside className="flex h-full w-full flex-col border-l bg-white sm:w-[340px]">
-      <div className="flex items-center justify-between border-b p-4">
+    <aside className="flex h-full w-full flex-col border-l-[1px] border-[#f5f5f5] bg-[#ffffff] py-2 sm:w-[340px]">
+      <div className="flex items-center justify-between px-4 pb-2">
         <h2 className="text-lg font-bold">장바구니</h2>
         <span className="text-sm text-gray-600">총 {cartItems.length}개</span>
       </div>
-      <div className="flex-1 space-y-4 overflow-auto px-4 py-2">
+
+      <div className="flex-1 space-y-3 overflow-auto px-4">
         {cartItems.map((item) => (
-          <div key={item.id} className="relative rounded border p-3 shadow-sm">
+          <div
+            key={item.id}
+            className="relative rounded-lg border border-[#e5e5e5] bg-white p-3"
+          >
             <button
               className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
               onClick={() => removeItem(item.id)}
@@ -31,14 +35,14 @@ export const CartPanel = () => {
                 <button
                   onClick={() => updateItemCount(item.id, item.count - 1)}
                   disabled={item.count === 1}
-                  className="rounded border px-2"
+                  className="rounded border border-[#e5e5e5] px-2"
                 >
                   -
                 </button>
                 <span>{item.count}</span>
                 <button
                   onClick={() => updateItemCount(item.id, item.count + 1)}
-                  className="rounded border px-2"
+                  className="rounded border border-[#e5e5e5] px-2"
                 >
                   +
                 </button>
@@ -50,8 +54,9 @@ export const CartPanel = () => {
           </div>
         ))}
       </div>
-      <div className="border-t p-4">
-        <div className="flex justify-between font-semibold">
+
+      <div className="mt-4 px-4">
+        <div className="flex justify-between text-base font-semibold">
           <span>합계</span>
           <span>{totalPrice.toLocaleString()}원</span>
         </div>
@@ -62,6 +67,7 @@ export const CartPanel = () => {
     </aside>
   );
 };
+
 // import { useMenuCartStore } from '@/store/useMenuCartStore';
 
 // export const CartPanel = () => {
@@ -72,7 +78,7 @@ export const CartPanel = () => {
 //   );
 
 //   return (
-//     <aside className="flex h-full w-full flex-col border-l bg-white sm:w-[340px]">
+//     <aside className="flex h-full w-full flex-col border-l-[2px] border-[#f5f5f5] bg-[#ffffff] py-2 sm:w-[340px]">
 //       <div className="flex items-center justify-between border-b p-4">
 //         <h2 className="text-lg font-bold">장바구니</h2>
 //         <span className="text-sm text-gray-600">총 {cartItems.length}개</span>
