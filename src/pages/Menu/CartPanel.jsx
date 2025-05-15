@@ -1,3 +1,4 @@
+import { Add, Close, Remove } from '@/assets/svg';
 import { useMenuCartStore } from '@/store/useMenuCartStore';
 
 export const CartPanel = () => {
@@ -24,7 +25,7 @@ export const CartPanel = () => {
               className="absolute top-2 right-2 text-gray-400 hover:text-red-500"
               onClick={() => removeItem(item.id)}
             >
-              ✕
+              <Close width={16} height={16} />
             </button>
             <div className="text-sm font-semibold text-gray-800">
               {item.name}
@@ -35,16 +36,16 @@ export const CartPanel = () => {
                 <button
                   onClick={() => updateItemCount(item.id, item.count - 1)}
                   disabled={item.count === 1}
-                  className="rounded border border-[#e5e5e5] px-2"
+                  className="rounded border-[#e5e5e5] px-2"
                 >
-                  -
+                  <Remove width={16} height={16} />
                 </button>
                 <span>{item.count}</span>
                 <button
                   onClick={() => updateItemCount(item.id, item.count + 1)}
-                  className="rounded border border-[#e5e5e5] px-2"
+                  className="rounded border-[#e5e5e5] px-2"
                 >
-                  +
+                  <Add width={16} height={16} />
                 </button>
               </div>
               <div className="text-sm font-semibold">
